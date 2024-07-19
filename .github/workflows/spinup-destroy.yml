@@ -1,6 +1,5 @@
 name: Configure Azure environment
 
-
 on:
   pull_request:
     types: [labeled]
@@ -11,7 +10,7 @@ env:
   AZURE_APP_PLAN: actions-ttt-deployment
   AZURE_LOCATION: '"East US"'
   ###############################################
-  ### Replace c-tateno with GitHub username ###
+  ### Replace c-tatenoc-tateno with GitHub username ###
   ###############################################
   AZURE_WEBAPP_NAME: c-tateno-ttt-app
 
