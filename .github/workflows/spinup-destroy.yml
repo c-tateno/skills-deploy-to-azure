@@ -1,5 +1,6 @@
 name: Configure Azure environment
 
+
 on:
   pull_request:
     types: [labeled]
