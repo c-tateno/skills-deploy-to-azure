@@ -1,13 +1,14 @@
-name: Deploy to staging
+name: Deploy to production
 
 on:
-  pull_request:
-    types: [labeled]
+  push:
+    branches:
+      - main
 
 env:
   IMAGE_REGISTRY_URL: ghcr.io
   ###############################################
-  ### Replace <username> with GitHub username ###
+  ### Replace c-tateno with GitHub username ###
   ###############################################
   DOCKER_IMAGE_NAME: c-tateno-azure-ttt
   AZURE_WEBAPP_NAME: c-tateno-ttt-app
@@ -15,8 +16,6 @@ env:
 
 jobs:
   build:
-    if: contains(github.event.pull_request.labels.*.name, 'stage')
-
     runs-on: ubuntu-latest
 
     steps:
@@ -90,7 +89,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{env.AZURE_WEBAPP_NAME}}
-          images: ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.DOCKER_IMAGE_NAME}}:${{ github.sha }}
+          images: ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.DOCKER_IMAGE_NAME}}:${{github.sha}}
 
       - name: Azure logout via Azure CLI
         uses: azure/CLI@v2
